@@ -1,6 +1,6 @@
 
 #include <iostream>
-
+#include <ctime>
 /*
  * Заполнение матрицы нулями.
  *
@@ -68,15 +68,13 @@ void FillSymmetricSecondaryDiagonal(int** matrix, int N) {
     ClearMatrix(matrix, N);
     for (int i = 0; i< N; ++i) {
         for(int j = 0; j < N; ++j) {
-            if(N-1-j == i) {
-                matrix[i][N-1-j] = 0;
-                continue;
-            }
-            if (j <= N - 1 - i) {
+            
+            if (j <= N - i - 1) {
                 int randInt = rand() % 10;
                 matrix[i][j] = randInt;
                 matrix[N-1-j][N-1-i] = randInt;
             }
+            
         }
     }
 }
@@ -223,7 +221,7 @@ void MatrixActions(int **matrix, int N) {
 }
 
 int main() {
-
+    srand(time(0));
     int N;
     std::cout << "Type N: ";
     std::cin >> N;
