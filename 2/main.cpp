@@ -6,9 +6,12 @@
  *
  * @return void
  */
-void FillMatrixZeros(int **matrix, int N) {
-    for (size_t i = 0; i < N; i++) {
-        for (size_t j = 0; j < N; j++) {
+void FillMatrixZeros(int **matrix, int N)
+{
+    for (size_t i = 0; i < N; i++)
+    {
+        for (size_t j = 0; j < N; j++)
+        {
             matrix[i][j] = 0;
         }
     }
@@ -18,7 +21,8 @@ void FillMatrixZeros(int **matrix, int N) {
  *
  * @return void
  */
-void ClearMatrix(int **matrix, int N) {
+void ClearMatrix(int **matrix, int N)
+{
     return FillMatrixZeros(matrix, N);
 }
 
@@ -29,9 +33,12 @@ void ClearMatrix(int **matrix, int N) {
  * @param N - размер матрицы
  * @return void
  */
-void PrintMatrix(int **matrix, int N) {
-    for (size_t i = 0; i < N; i++) {
-        for (size_t j = 0; j < N; j++) {
+void PrintMatrix(int **matrix, int N)
+{
+    for (size_t i = 0; i < N; i++)
+    {
+        for (size_t j = 0; j < N; j++)
+        {
             std::cout << " " << matrix[i][j] << " ";
         }
         std::cout << std::endl;
@@ -45,11 +52,15 @@ void PrintMatrix(int **matrix, int N) {
  * @param N - размер матрицы
  * @return void
  */
-void FillSymmetricMainDiagonal(int** matrix, int N) {
+void FillSymmetricMainDiagonal(int **matrix, int N)
+{
     ClearMatrix(matrix, N);
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j <= i; ++j) {
-            if(j == i) continue;
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j <= i; ++j)
+        {
+            if (j == i)
+                continue;
             int randomInt = rand() % 10;
             matrix[i][j] = randomInt;
             matrix[j][i] = randomInt;
@@ -64,17 +75,20 @@ void FillSymmetricMainDiagonal(int** matrix, int N) {
  * @param N - размер матрицы
  * @return void
  */
-void FillSymmetricSecondaryDiagonal(int** matrix, int N) {
+void FillSymmetricSecondaryDiagonal(int **matrix, int N)
+{
     ClearMatrix(matrix, N);
-    for (int i = 0; i< N; ++i) {
-        for(int j = 0; j < N; ++j) {
-            
-            if (j <= N - i - 1) {
+    for (int i = 0; i < N; ++i)
+    {
+        for (int j = 0; j < N; ++j)
+        {
+
+            if (j <= N - i - 1)
+            {
                 int randInt = rand() % 10;
                 matrix[i][j] = randInt;
-                matrix[N-1-j][N-1-i] = randInt;
+                matrix[N - 1 - j][N - 1 - i] = randInt;
             }
-            
         }
     }
 }
@@ -86,16 +100,22 @@ void FillSymmetricSecondaryDiagonal(int** matrix, int N) {
  * @param N - размер матрицы
  * @return void
  */
-void FillPascalTriangle(int** matrix, int N) {
+void FillPascalTriangle(int **matrix, int N)
+{
     ClearMatrix(matrix, N);
-    for (int i = N - 1; i >= 0; i++) {
-        for (int j = 0; j <= N; j++) {
-            if (j == i) {
+    for (int i = N - 1; i >= 0; i++)
+    {
+        for (int j = 0; j <= N; j++)
+        {
+            if (j == i)
+            {
                 matrix[i][j] = 1;
-            } else {
+            }
+            else
+            {
                 int randInt = rand() % 10;
                 matrix[i][j] = randInt;
-                matrix[N-1-i][N-1-j] = randInt;
+                matrix[N - 1 - i][N - 1 - j] = randInt;
             }
         }
     }
@@ -108,7 +128,8 @@ void FillPascalTriangle(int** matrix, int N) {
  * @param b - второе значение
  * @return минимальное значение
  */
-int Min(int a, int b) {
+int Min(int a, int b)
+{
     return a < b ? a : b;
 }
 
@@ -119,7 +140,8 @@ int Min(int a, int b) {
  * @param b - второе значение
  * @return максимальное значение
  */
-int Max(int a, int b) {
+int Max(int a, int b)
+{
     return a > b ? a : b;
 }
 
@@ -130,35 +152,44 @@ int Max(int a, int b) {
  * @param N - размер матрицы
  * @return void
  */
-void FillSaper(int** matrix, int N) {
+void FillSaper(int **matrix, int N)
+{
     ClearMatrix(matrix, N);
 
     int filled = 0;
-    int countMines = rand() % (N*N - 2) + 2;
+    int countMines = rand() % (N * N - 2) + 2;
 
-    while (filled < countMines) {
+    while (filled < countMines)
+    {
         int x = rand() % N;
         int y = rand() % N;
-        if(matrix[x][y] != -1) {
+        if (matrix[x][y] != -1)
+        {
             matrix[x][y] = -1;
             filled++;
-        } else {
+        }
+        else
+        {
             continue;
         }
 
-        for(int i = Max(x - 1, 0); i <= Min(x + 1, N - 1); i++) {
-            for(int j = Max(y - 1, 0); j <= Min(y + 1, N - 1); j++) {
-                if(matrix[i][j] != -1) {
+        for (int i = Max(x - 1, 0); i <= Min(x + 1, N - 1); i++)
+        {
+            for (int j = Max(y - 1, 0); j <= Min(y + 1, N - 1); j++)
+            {
+                if (matrix[i][j] != -1)
+                {
                     matrix[i][j]++;
                 }
             }
         }
     }
-
 }
 
-void ClearMemory(int** matrix, int N) {
-    for (int i = 0; i < N; ++i) {
+void ClearMemory(int **matrix, int N)
+{
+    for (int i = 0; i < N; ++i)
+    {
         delete[] matrix[i];
     }
     delete[] matrix;
@@ -171,10 +202,12 @@ void ClearMemory(int** matrix, int N) {
  * @param N - размер матрицы
  * @return void
  */
-void MatrixActions(int **matrix, int N) {
+void MatrixActions(int **matrix, int N)
+{
     int choice;
 
-    do {
+    do
+    {
         std::cout << "\nSelect an action:\n";
         std::cout << "1. Clear Matrix\n";
         std::cout << "2. Main Diagonal\n";
@@ -185,49 +218,52 @@ void MatrixActions(int **matrix, int N) {
         std::cout << "0. Exit\n";
         std::cin >> choice;
 
-        switch (choice) {
-            case 1:
-                ClearMatrix(matrix, N);
-                std::cout << "All is cleared.\n";
-                break;
-            case 2:
-                FillSymmetricMainDiagonal(matrix, N);
-                std::cout << "All is filled.\n";
-                break;
-            case 3:
-                FillSymmetricSecondaryDiagonal(matrix, N);
-                std::cout << "All is filled.\n";
-                break;
-            case 4:
-                FillPascalTriangle(matrix, N);
-                std::cout << "All is filled.\n";
-                break;
-            case 5:
-                FillSaper(matrix, N);
-                std::cout << "All is filled.\n";
-                break;
-            case 6:
-                PrintMatrix(matrix, N);
-                break;
-            
-            case 0:
-                ClearMemory(matrix, N);
-                break;
-            default:
-                std::cout << "Wrong choice.\n";
-                break;
+        switch (choice)
+        {
+        case 1:
+            ClearMatrix(matrix, N);
+            std::cout << "All is cleared.\n";
+            break;
+        case 2:
+            FillSymmetricMainDiagonal(matrix, N);
+            std::cout << "All is filled.\n";
+            break;
+        case 3:
+            FillSymmetricSecondaryDiagonal(matrix, N);
+            std::cout << "All is filled.\n";
+            break;
+        case 4:
+            FillPascalTriangle(matrix, N);
+            std::cout << "All is filled.\n";
+            break;
+        case 5:
+            FillSaper(matrix, N);
+            std::cout << "All is filled.\n";
+            break;
+        case 6:
+            PrintMatrix(matrix, N);
+            break;
+
+        case 0:
+            ClearMemory(matrix, N);
+            break;
+        default:
+            std::cout << "Wrong choice.\n";
+            break;
         }
     } while (choice != 0);
 }
 
-int main() {
+int main()
+{
     srand(time(0));
     int N;
     std::cout << "Type N: ";
     std::cin >> N;
-    
-    int** matrix = new int*[N];
-    for (int i = 0; i < N; ++i) {
+
+    int **matrix = new int *[N];
+    for (int i = 0; i < N; ++i)
+    {
         matrix[i] = new int[N];
     }
     FillMatrixZeros(matrix, N);
