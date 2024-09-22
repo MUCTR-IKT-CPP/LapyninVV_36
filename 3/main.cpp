@@ -76,7 +76,7 @@ float GetTriangleSquere(Figure figure) {
  * @return площадь
 */
 float GetCircleSquere(Figure figure) {
-    return M_PI * figure.side * figure.side;
+    return M_PI * pow(figure.side/2, 2);
 }
 
 /*
@@ -189,6 +189,63 @@ float findMinRadius(Figure *figures, int N) {
     return minRadius;
 }
 
+/*
+ * Меню
+ *
+ * @param figures массив фигур
+ * @param N размер массива
+ * 
+ * @return void
+*/
+void Actions(Figure *figures, int N) {
+    int choice;
+
+    do {
+        std::cout << "\nSelect an action:\n";
+        std::cout << "1. Print Figures\n";
+        std::cout << "2. With bigger square\n";
+        std::cout << "3. Count figures\n";
+        std::cout << "4. Sum square\n";
+        std::cout << "5. Min radius\n";
+        std::cout << "0. Exit\n";
+        std::cin >> choice;
+
+        int counts[4] = {0};
+        float minRadius;
+
+        switch (choice)
+        {
+        case 1:
+            PrintFigures(figures, N);
+            break;
+        case 2:
+            float userSquare;
+            std::cout << "Type square: ";
+            std::cin >> userSquare;
+            PrintBiggerSquareFigures(figures, N, userSquare);
+            break;
+        case 3:
+            CountFiguresByType(figures, N, counts);
+            for (int i = 0; i < 4; i++) {
+                std::cout << "Type " << i << " Count " << counts[i] << std::endl;
+            }
+            break;
+        case 4:
+            std::cout << "Sum square: " << SumSquare(figures, N) << std::endl;
+            break;
+        case 5:
+            minRadius = findMinRadius(figures, N);
+            std::cout << "Min radius: " << minRadius << std::endl;
+            break;
+        case 0:
+            break;
+        default:
+            std::cout << "Wrong choice. Try again.\n";
+            break;
+        }
+    } while (choice != 0);
+}
+
 
 int main() {
     srand(time(0));
@@ -200,22 +257,6 @@ int main() {
     Figure *figures = new Figure[N];
     GenerateFigures(figures, N);
 
-    PrintFigures(figures, N);
+    Actions(figures, N);
 
-    int counts[4] = {0};
-    CountFiguresByType(figures, N, counts);
-    for (int i = 0; i < 4; i++) {
-        std::cout << "Count " << i << ": " << counts[i] << std::endl;
-    }
-
-    float userSquare;
-    std::cout << "Type square: ";
-    std::cin >> userSquare;
-
-    PrintBiggerSquareFigures(figures, N, userSquare);
-
-    float minRadius = findMinRadius(figures, N);
-    std::cout << "Min radius: " << minRadius << std::endl;
-
-    std::cout << "Sum square: " << SumSquare(figures, N) << std::endl;
 }
