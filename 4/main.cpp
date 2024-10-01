@@ -187,6 +187,13 @@ private:
             number++;
         }
     }
+    /*
+    * Добавить наемника в конкретную группу
+    */
+    void addMercenary(Mercenary* merc, std::vector<Mercenary*> *mercsGroup) {
+        mercsGroup->push_back(merc);
+    }
+
 public:
 
     ~Guild() {
@@ -202,10 +209,7 @@ public:
         mercenaries.push_back(merc);
     }
 
-    void addMercenary(Mercenary* merc, std::vector<Mercenary*> *mercsGroup) {
-        mercsGroup->push_back(merc);
-    }
-
+    
     /*
     * Вывод наемников
     */
