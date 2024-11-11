@@ -366,7 +366,6 @@ private:
                 if (distance <= fighter->getAttackRange()) {
                     fighter->attack(target);
                 } else {
-                    // Движение к цели
                     auto [targetX, targetY] = target->getPosition();
                     auto [fighterX, fighterY] = fighter->getPosition();
                     int dx = (targetX > fighterX) ? 1 : (targetX < fighterX) ? -1 : 0;
